@@ -9,7 +9,7 @@ export type Blog = {
   body: string;
 };
 const Home: NextPage<MicroCMSListResponse<Blog>> = (props) => {
-  const [search, setSeaech] = useState<MicroCMSListResponse<Blog>>();
+  const [search, setSearch] = useState<MicroCMSListResponse<Blog>>();
 
   const handleSubmit: ComponentProps<"form">["onSubmit"] = async (event) => {
     event.preventDefault();
@@ -20,11 +20,11 @@ const Home: NextPage<MicroCMSListResponse<Blog>> = (props) => {
       body: JSON.stringify({ q }),
     });
     const json: MicroCMSListResponse<Blog> = await data.json();
-    setSeaech(json);
+    setSearch(json);
   };
 
   const handleClick: ComponentProps<"button">["onClick"] = async () => {
-    setSeaech(undefined);
+    setSearch(undefined);
   };
 
   const contents = search ? search.contents : props.contents;
