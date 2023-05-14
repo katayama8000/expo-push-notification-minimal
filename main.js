@@ -1,3 +1,10 @@
+let isChanged = false;
 document.getElementById('btn').addEventListener('click', () => {
-    document.querySelector('h1').textContent = "CHANGED";
+    if (isChanged) {
+        document.getElementById('btn').textContent = 'CLICK ME';
+        isChanged = false;
+    } else {
+        document.getElementById('btn').textContent = 'CLICKED';
+        isChanged = true;
+    }
 })
