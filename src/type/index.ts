@@ -1,1 +1,1 @@
-export * from './Goal.type';
+

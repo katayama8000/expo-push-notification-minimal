@@ -1,18 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { Button, View, Text, FlatList } from 'react-native';
-import { Card } from '../component/Card';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProp } from '../../App';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { storage } from '../lib/FBConfig';
 
-type Item = {
-  id: number;
-  title: string;
-  description: string;
-};
-
-export const AllTryScreen: FC = () => {
+export const HomeScreen: FC = () => {
   const navigation = useNavigation<NavigationProp>();
 
   return (
@@ -20,7 +11,7 @@ export const AllTryScreen: FC = () => {
       <Button
         title="新規作成"
         onPress={() => {
-          navigation.navigate('NewTry');
+          navigation.navigate('AboutScreen');
         }}
       />
       {/* <FlatList
