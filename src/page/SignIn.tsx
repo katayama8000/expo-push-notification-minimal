@@ -9,7 +9,6 @@ import { TouchableButton } from '../component/TouchableButton';
 export const SignInScreen: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const navigation = useNavigation<NavigationProp>();
 
   const handleSignIn = async () => {
     try {
@@ -23,7 +22,6 @@ export const SignInScreen: FC = () => {
         password
       );
       console.log(user);
-      navigation.navigate('AllTry');
     } catch (error) {
       console.error('Error signing in:', error);
     }

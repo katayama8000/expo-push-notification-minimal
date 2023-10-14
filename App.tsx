@@ -9,10 +9,10 @@ import { HomeScreen } from './src/page/Home';
 import { AboutScreen } from './src/page/About';
 
 type ScreenList = {
-  HomeScreen: undefined;
-  AboutScreen: undefined;
-  SignInScreen: undefined;
-  SignUpScreen: undefined;
+  Home: undefined;
+  About: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
 };
 
 export type NavigationProp = StackNavigationProp<ScreenList>;
@@ -23,7 +23,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Demo" component={AboutScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Tab" component={MyTabs} />
