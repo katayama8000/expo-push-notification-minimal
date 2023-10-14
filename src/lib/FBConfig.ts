@@ -4,13 +4,17 @@ import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAIzfqQwaM9zRoZq-Mk9gpmv434hrMFs3Y',
-  authDomain: 'try-something-new-mobile.firebaseapp.com',
-  projectId: 'try-something-new-mobile',
-  storageBucket: 'try-something-new-mobile.appspot.com',
-  messagingSenderId: '1038628815134',
-  appId: '1:1038628815134:web:b0aa398872cf81c1e4090f',
+  apiKey: 'AIzaSyAI_ORYeYvJVngHm7yGG0fsdL1Jjwd_kpY',
+  authDomain: 'stop-adhd.firebaseapp.com',
+  projectId: 'stop-adhd',
+  storageBucket: 'stop-adhd.appspot.com',
+  messagingSenderId: '629637061763',
+  appId: '1:629637061763:web:81ea837fe78dea793ccfb6',
+  measurementId: 'G-E3MT5712JD',
 };
+
+console.log(process.env);
+console.table(firebaseConfig);
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
