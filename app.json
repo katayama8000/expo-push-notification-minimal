@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.katayama4200.expopushnotificationminimal",
-      "googleServiceFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
