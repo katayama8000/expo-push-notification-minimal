@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "39554594518",
+    "project_id": "expo-push-notification-minimal",
+    "storage_bucket": "expo-push-notification-minimal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39554594518:android:249a0d6f7150b9bc07bb77",
+        "android_client_info": {
+          "package_name": "com.katayama4200.expopushnotificationminimal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADDRGA5CDD-bHLXLgyeVQPS8AGjxhgmN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
