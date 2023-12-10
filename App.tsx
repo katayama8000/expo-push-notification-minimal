@@ -193,6 +193,20 @@ export default function App() {
           });
         }}
       />
+      <Button
+        title="Get from server"
+        onPress={async () => {
+          try {
+            const response = await axios.get('http://localhost:3000/');
+            console.log('Response:', response.data);
+          } catch (error) {
+            console.error(
+              'Error:',
+              error.response ? error.response.data : error.message
+            );
+          }
+        }}
+      />
     </View>
   );
 }
