@@ -139,7 +139,7 @@ export default function App() {
     );
     try {
       const response = await axios.post(
-        'http://localhost:3000/submit',
+        'http://127.0.0.1:3000/submit',
         {
           expo_push_token,
           title,
@@ -197,7 +197,7 @@ export default function App() {
         title="Get from server"
         onPress={async () => {
           try {
-            const response = await axios.get('http://localhost:3000/');
+            const response = await axios.get('http://127.0.0.1:3000/');
             console.log('Response:', response.data);
           } catch (error) {
             console.error(
