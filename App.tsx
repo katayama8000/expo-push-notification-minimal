@@ -137,20 +137,13 @@ export default function App() {
         body,
       })
     );
+    const token = 'ExponentPushToken[b5nR6zALafV431QtOC7byo]';
     try {
-      const response = await axios.post(
-        'http://127.0.0.1:3000/submit',
-        {
-          expo_push_token,
-          title,
-          body,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post('http://127.0.0.1:3000/submit', {
+        token,
+        title,
+        body,
+      });
 
       console.log('Response:', response.data);
       return response;
@@ -160,6 +153,19 @@ export default function App() {
         error.response ? error.response.data : error.message
       );
       throw error;
+    }
+  };
+
+  const handlePostSubmit = async () => {
+    const expoPushToken = 'ExponentPushToken[b5nR6zALafV431QtOC7byo]';
+    try {
+      const response = await axios.post('http://127.0.0.1:3000/submit', {
+        body: 'test-from-nextjs',
+        expo_push_token: expoPushToken,
+        title: 'test-from-nextjs',
+      });
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
@@ -199,6 +205,27 @@ export default function App() {
           try {
             const response = await axios.get('http://127.0.0.1:3000/');
             console.log('Response:', response.data);
+          } catch (error) {
+            console.error(
+              'Error:',
+              error.response ? error.response.data : error.message
+            );
+          }
+        }}
+      />
+      <Button
+        title="Post to server2"
+        onPress={async () => {
+          await handlePostSubmit();
+        }}
+      />
+      <Button
+        title="Get from server2"
+        onPress={async () => {
+          try {
+            fetch('https://jsonplaceholder.typicode.com/todos/1')
+              .then((response) => response.json())
+              .then((json) => console.log(json));
           } catch (error) {
             console.error(
               'Error:',
