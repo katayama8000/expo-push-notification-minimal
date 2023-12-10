@@ -4,6 +4,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { Subscription } from 'expo-notifications';
+import axios, { AxiosResponse } from 'axios';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -111,6 +112,57 @@ export default function App() {
     };
   }, []);
 
+  interface Args {
+    expo_push_token: string;
+    title: string;
+    body: string;
+  }
+
+  interface Response {
+    success: boolean;
+  }
+
+  const apiUrl = 'http://localhost/submit';
+
+  const pushMessage = async ({
+    expo_push_token,
+    title,
+    body,
+  }: Args): Promise<AxiosResponse<Response>> => {
+    console.log(
+      'Sending:',
+      JSON.stringify({
+        expo_push_token,
+        title,
+        body,
+      })
+    );
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/submit',
+        {
+          expo_push_token,
+          title,
+          body,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log('Response:', response.data);
+      return response;
+    } catch (error) {
+      console.error(
+        'Error:',
+        error.response ? error.response.data : error.message
+      );
+      throw error;
+    }
+  };
+
   return (
     <View
       style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
@@ -129,6 +181,16 @@ export default function App() {
         title="Press to Send Notification"
         onPress={async () => {
           await sendPushNotification(expoPushToken);
+        }}
+      />
+      <Button
+        title="Post to server"
+        onPress={async () => {
+          await pushMessage({
+            expo_push_token: expoPushToken || '',
+            title: 'Hello',
+            body: 'World',
+          });
         }}
       />
     </View>
