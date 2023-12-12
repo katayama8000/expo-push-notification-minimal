@@ -122,8 +122,6 @@ export default function App() {
     success: boolean;
   }
 
-  const apiUrl = 'http://localhost/submit';
-
   const pushMessage = async ({
     expo_push_token,
     title,
@@ -159,7 +157,7 @@ export default function App() {
   const handlePostSubmit = async () => {
     const expoPushToken = 'ExponentPushToken[b5nR6zALafV431QtOC7byo]';
     try {
-      const response = await axios.post('http://127.0.0.1:3000/submit', {
+      const response = await axios.post('http://192.168.0.10:3000/submit', {
         body: 'test-from-nextjs',
         expo_push_token: expoPushToken,
         title: 'test-from-nextjs',
@@ -203,7 +201,7 @@ export default function App() {
         title="Get from server"
         onPress={async () => {
           try {
-            const response = await axios.get('http://127.0.0.1:3000/');
+            const response = await axios.get('http://192.168.0.10:3000/');
             console.log('Response:', response.data);
           } catch (error) {
             console.error(
@@ -220,12 +218,12 @@ export default function App() {
         }}
       />
       <Button
-        title="Get from server2"
+        title="Get from server"
         onPress={async () => {
           try {
-            fetch('https://jsonplaceholder.typicode.com/todos/1')
-              .then((response) => response.json())
-              .then((json) => console.log(json));
+            console.log('Sending request');
+            const response = await axios.get('http://192.168.0.10:4000/');
+            console.log('Response:', response.data);
           } catch (error) {
             console.error(
               'Error:',
