@@ -4,13 +4,12 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { Subscription } from 'expo-notifications';
-import axios, { AxiosResponse } from 'axios';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -112,61 +111,6 @@ export default function App() {
     };
   }, []);
 
-  interface Args {
-    expo_push_token: string;
-    title: string;
-    body: string;
-  }
-
-  interface Response {
-    success: boolean;
-  }
-
-  const pushMessage = async ({
-    expo_push_token,
-    title,
-    body,
-  }: Args): Promise<AxiosResponse<Response>> => {
-    console.log(
-      'Sending:',
-      JSON.stringify({
-        expo_push_token,
-        title,
-        body,
-      })
-    );
-    const token = 'ExponentPushToken[b5nR6zALafV431QtOC7byo]';
-    try {
-      const response = await axios.post('http://127.0.0.1:3000/submit', {
-        token,
-        title,
-        body,
-      });
-
-      console.log('Response:', response.data);
-      return response;
-    } catch (error) {
-      console.error(
-        'Error:',
-        error.response ? error.response.data : error.message
-      );
-      throw error;
-    }
-  };
-
-  const handlePostSubmit = async () => {
-    const expoPushToken = 'ExponentPushToken[b5nR6zALafV431QtOC7byo]';
-    try {
-      const response = await axios.post('http://192.168.0.10:3000/submit', {
-        body: 'test-from-nextjs',
-        expo_push_token: expoPushToken,
-        title: 'test-from-nextjs',
-      });
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   return (
     <View
       style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
@@ -185,51 +129,6 @@ export default function App() {
         title="Press to Send Notification"
         onPress={async () => {
           await sendPushNotification(expoPushToken);
-        }}
-      />
-      <Button
-        title="Post to server"
-        onPress={async () => {
-          await pushMessage({
-            expo_push_token: expoPushToken || '',
-            title: 'Hello',
-            body: 'World',
-          });
-        }}
-      />
-      <Button
-        title="Get from server"
-        onPress={async () => {
-          try {
-            const response = await axios.get('http://192.168.0.10:3000/');
-            console.log('Response:', response.data);
-          } catch (error) {
-            console.error(
-              'Error:',
-              error.response ? error.response.data : error.message
-            );
-          }
-        }}
-      />
-      <Button
-        title="Post to server2"
-        onPress={async () => {
-          await handlePostSubmit();
-        }}
-      />
-      <Button
-        title="Get from server"
-        onPress={async () => {
-          try {
-            console.log('Sending request');
-            const response = await axios.get('http://192.168.0.10:4000/');
-            console.log('Response:', response.data);
-          } catch (error) {
-            console.error(
-              'Error:',
-              error.response ? error.response.data : error.message
-            );
-          }
         }}
       />
     </View>
